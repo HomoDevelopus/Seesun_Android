@@ -42,8 +42,8 @@ public class DialogActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //아니오 버튼 클릭시
-                //바로 시작
-                String str2 = "바로 시작";
+                //메인 액티비티로 이동
+                String str2 = "횡단보도 보행모드로 이동";
                 Toast.makeText(getApplicationContext(), str2 , Toast.LENGTH_SHORT).show();
                 //메인으로 이동
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);

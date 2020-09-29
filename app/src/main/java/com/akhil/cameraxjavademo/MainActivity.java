@@ -2,6 +2,7 @@ package com.akhil.cameraxjavademo;
 
 import androidx.annotation.NonNull;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
@@ -33,6 +34,7 @@ import android.os.Looper;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -80,13 +82,36 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     SoundPool sound;
     int SOUND_BEEP;
 
+    private Button tutoBtn;
+    private Button exitBtn;
+    private String msg;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         mPreviewView = findViewById(R.id.previewView);
 //        captureImage = findViewById(R.id.captureImg);
+        tutoBtn = findViewById(R.id.btn_tutorial);//튜토리얼 버튼
+        exitBtn = findViewById(R.id.btn_exit);//종료 버튼
+        tutoBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                msg = "튜토리얼로 이동";
+                Toast.makeText(getApplicationContext(), msg , Toast.LENGTH_SHORT).show();
+                //튜토리얼로 이동
+                Intent intent = new Intent(getApplicationContext(),TutorialActivity.class);
+                startActivity(intent);
+            }
+        });
+        exitBtn.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //어플리케이션 종료
+                ActivityCompat.finishAffinity(MainActivity.this);//액티비티 종료
+                System.exit(0);//프로세스 종료
+            }
+        });
 
         if (allPermissionsGranted()) {
             startCamera(); //start camera if permission has been granted by user
