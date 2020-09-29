@@ -1,10 +1,15 @@
 package com.akhil.cameraxjavademo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -33,17 +38,16 @@ public class TutorialActivity extends AppCompatActivity {
         endBtn.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(m!=null && m.isPlaying()){
+                if (m != null && m.isPlaying()) {
                     m.stop();
                 }
                 msg = "횡단보도 보행모드로 이동";
-                Toast.makeText(getApplicationContext(), msg , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                 //mainActivity로 이동
-                Intent intent = new Intent(TutorialActivity.this,MainActivity.class);
+                Intent intent = new Intent(TutorialActivity.this, MainActivity.class);
                 startActivity(intent);
             }
         });
-//        play();
     }
 
     public void play(){

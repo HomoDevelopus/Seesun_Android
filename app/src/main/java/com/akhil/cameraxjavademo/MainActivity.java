@@ -71,8 +71,8 @@ import okhttp3.Response;
 public class MainActivity extends AppCompatActivity implements TextToSpeech.OnInitListener {
 
     private Executor executor = Executors.newSingleThreadExecutor();
-    private int REQUEST_CODE_PERMISSIONS = 1001;
-    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
+//    private int REQUEST_CODE_PERMISSIONS = 1001;
+//    private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
     private CrossThread crossTh; // check cross walk mode
     ArrayList<Long> DateArr;
 
@@ -113,11 +113,11 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
             }
         });
 
-        if (allPermissionsGranted()) {
+//        if (allPermissionsGranted()) {
             startCamera(); //start camera if permission has been granted by user
-        } else {
-            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
-        }
+//        } else {
+//            ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
+//        }
 
         tts = new TextToSpeech(this, this);
 
@@ -410,7 +410,6 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 
     }
 
-
     public boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state)) {
@@ -419,27 +418,27 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         return false;
     }
 
-    private boolean allPermissionsGranted(){
-
-        for(String permission : REQUIRED_PERMISSIONS){
-            if(ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED){
-                return false;
-            }
-        }
-        return true;
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-
-        if(requestCode == REQUEST_CODE_PERMISSIONS){
-            if(allPermissionsGranted()){
-                startCamera();
-            } else{
-                Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
-                this.finish();
-            }
-        }
-    }
+//    private boolean allPermissionsGranted(){
+//
+//        for(String permission : REQUIRED_PERMISSIONS){
+//            if(ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED){
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+//    @Override
+//    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+//
+//        if(requestCode == REQUEST_CODE_PERMISSIONS){
+//            if(allPermissionsGranted()){
+//                startCamera();
+//            } else{
+//                Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
+//                this.finish();
+//            }
+//        }
+//    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
