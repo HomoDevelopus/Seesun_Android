@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
                                         Bitmap originalBm = BitmapFactory.decodeFile(file.getAbsolutePath(), options);
 
                                         /* 사진 회전 */
-                                        originalBm = GetRotatedBitmap(originalBm, 90);
+//                                        originalBm = GetRotatedBitmap(originalBm, 90);
                                         OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
 
                                         /* 크기 압축 */
