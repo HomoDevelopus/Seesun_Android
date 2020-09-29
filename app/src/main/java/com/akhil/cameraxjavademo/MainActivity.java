@@ -5,6 +5,8 @@ import androidx.annotation.NonNull;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.media.AudioManager;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Environment;
 
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
     PreviewView mPreviewView;
     ImageView captureImage;
     private TextToSpeech tts;
+    SoundPool sound;
+    int SOUND_BEEP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +99,9 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
         DateArr = new ArrayList<Long>();
         crossTh = new CrossThread(DateArr);
         crossTh.start();    // 횡단보도 감시 스레드 시작
+
+        sound = new SoundPool(1, AudioManager.STREAM_MUSIC, 0);
+        SOUND_BEEP = sound.load(this, R.raw.ding, 0);
     }
 
     private void startCamera() {
@@ -348,6 +355,7 @@ public class MainActivity extends AppCompatActivity implements TextToSpeech.OnIn
 //                            }
 
                             if (crossTh.tf_mode){
+                                sound.play(SOUND_BEEP, 1f, 1f,0, 0, 1f);  // 횡단보도 신호음 알림 삽입
                                 if (object.equals("cross walk")) continue;
                                 speakOut(object);
                             } else { // 신호등 모드가 아니라면 횡단보도 탐지 확인
